@@ -47,6 +47,7 @@ class AdminController extends Controller
     {
         $totalViews = Metric::where('event', 'page_view')->count();
         $totalViewDetails = Metric::where('event', 'view_details')->count();
+        $totalApplyClicks = Metric::where('event', 'apply_click')->count();
 
         $perJobViewDetails = Metric::selectRaw('job_id, COUNT(*) as total')
             ->where('event', 'view_details')
@@ -66,6 +67,7 @@ class AdminController extends Controller
         return view('admin.dashboard', [
             'totalViews' => $totalViews,
             'totalViewDetails' => $totalViewDetails,
+            'totalApplyClicks' => $totalApplyClicks,
             'perJobViewDetails' => $perJobViewDetails,
             'subscriptions' => $subscriptions,
             'jobIdToTitle' => $jobIdToTitle,

@@ -144,13 +144,18 @@ function initAnimations() {
     });
     
     // Add loading states to buttons
-    const applyButtons = document.querySelectorAll('.btn-primary');
+    const applyButtons = document.querySelectorAll('.job-card .btn-primary');
     applyButtons.forEach(button => {
         button.addEventListener('click', function() {
             if (this.href && this.href.startsWith('mailto:')) {
                 // Add loading state
                 this.classList.add('loading');
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening Email...';
+                const card = this.closest('.job-card');
+                const jobId = card ? card.getAttribute('data-job-id') : null;
+                if (jobId) {
+                    postTrack('apply_click', jobId);
+                }
                 
                 // Reset after a short delay
                 setTimeout(() => {

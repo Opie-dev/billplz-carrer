@@ -39,6 +39,10 @@
                 <h2>Total View Details Clicks</h2>
                 <div class="stat">{{ number_format($totalViewDetails) }}</div>
             </div>
+            <div class="card">
+                <h2>Total Apply Clicks</h2>
+                <div class="stat">{{ number_format($totalApplyClicks) }}</div>
+            </div>
         </div>
 
         <div class="card" style="margin-top:1rem;">

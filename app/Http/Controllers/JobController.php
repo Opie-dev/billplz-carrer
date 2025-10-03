@@ -213,7 +213,7 @@ class JobController extends Controller
     public function track(Request $request)
     {
         $validated = $request->validate([
-            'event' => 'required|in:page_view,view_details',
+            'event' => 'required|in:page_view,view_details,apply_click',
             'job_id' => 'nullable|integer',
             'path' => 'nullable|string|max:255',
         ]);
