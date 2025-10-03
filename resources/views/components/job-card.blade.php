@@ -78,7 +78,7 @@
         </div>
 
         <div class="job-actions">
-            <a href="mailto:love@billplz.com?subject={{ urlencode($job['title'].' Application - JkOpie Careers') }}&body={{ urlencode("Hello Billplz Team,\n\nI would like to apply for the {$job['title']} position.\n\nName: \nPhone: \nPortfolio/LinkedIn: \nCover letter: \nReferral: Ahmad Syaafi\n\nThank you.") }}" class="btn btn-primary">
+            <a href="mailto:love@billplz.com?subject={{ urlencode($job['title'].' Application -  Billplz Careers') }}&body={{ urlencode("Hello Billplz Team,\n\nI would like to apply for the {$job['title']} position.\n\nName: \nPhone: \nPortfolio/LinkedIn: \nCover letter: \nReferral: Ahmad Syaafi\n\nThank you.") }}" class="btn btn-primary">
                 <i class="fas fa-paper-plane"></i>
                 Apply Now
             </a>
