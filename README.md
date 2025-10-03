@@ -7,19 +7,94 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## JkOpie Careers - Laravel App
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This repository hosts the JkOpie Careers site built on Laravel. It lists open positions, lets visitors subscribe to job notifications, and provides an admin dashboard with basic analytics.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Careers landing page with open positions rendered from `JobController::getJobs()`
+- Subscription form (AJAX) that stores emails in `subscriptions` table
+- Frontend tracking of:
+  - page views (`metrics.event = page_view`)
+  - view details clicks (`metrics.event = view_details`, `job_id` attached)
+- Admin login (session-based) using the `users` table with roles
+- Admin dashboard showing:
+  - Total website views
+  - Total “view details” clicks
+  - Per-job click counts (mapped to titles via `getJobs()`)
+  - Subscription list (paginated)
+
+### Tech
+
+- Laravel 11 (routing, middleware aliasing in `bootstrap/app.php`)
+- Blade views (`resources/views`)
+- Public assets: `public/css/careers.css`, `public/js/careers.js`, `public/css/admin-login.css`
+
+### Setup
+
+1) Install dependencies and set environment
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+2) Configure database in `.env`
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=jkopie_careers
+DB_USERNAME=root
+DB_PASSWORD=secret
+
+# Optional admin credentials (used by seeder)
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=password123
+```
+
+3) Migrate and seed
+
+```bash
+php artisan migrate
+php artisan db:seed --class="Database\\Seeders\\AdminSeeder"
+```
+
+4) Serve
+
+```bash
+php artisan serve
+# http://localhost:8000
+```
+
+### Admin
+
+- Login page: `/admin/login`
+- Email/password from `.env` via `AdminSeeder`
+- Users must have `role = admin` in `users` table
+
+### Tracking API
+
+- POST `/track` JSON body:
+
+```json
+{ "event": "page_view" | "view_details", "job_id": 1, "path": "/" }
+```
+
+### Subscriptions API
+
+- POST `/subscribe` form-data: `email`
+
+### Code Locations
+
+- Jobs data: `app/Http/Controllers/JobController::getJobs()`
+- Admin: `app/Http/Controllers/AdminController.php`
+- Middleware alias: `bootstrap/app.php` (`admin` → `AdminAuth`)
+- DB models: `app/Models/Subscription.php`, `app/Models/Metric.php`
+- Migrations: subscriptions, metrics, add_role_to_users
 
 ## Learning Laravel
 
