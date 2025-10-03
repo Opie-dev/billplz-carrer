@@ -41,29 +41,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-2) Configure database in `.env`
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=jkopie_careers
-DB_USERNAME=root
-DB_PASSWORD=secret
-
-# Optional admin credentials (used by seeder)
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=password123
-```
-
-3) Migrate and seed
-
-```bash
-php artisan migrate
-php artisan db:seed --class="Database\\Seeders\\AdminSeeder"
-```
-
-4) Serve
+2) Serve
 
 ```bash
 php artisan serve
@@ -73,7 +51,6 @@ php artisan serve
 ### Admin
 
 - Login page: `/admin/login`
-- Email/password from `.env` via `AdminSeeder`
 - Users must have `role = admin` in `users` table
 
 ### Tracking API
