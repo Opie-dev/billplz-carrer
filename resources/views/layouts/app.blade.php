@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Billplz') }}. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} JkOpie. All rights reserved.</p>
             </div>
         </div>
     </footer>
