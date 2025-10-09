@@ -6,6 +6,13 @@
 @endphp
 
 <div class="{{ $job_class }}" data-job-id="{{ $job['id'] }}">
+    <div class="job-disabled-overlay" aria-label="Applications closed"
+         style="position:absolute; inset:0; background:rgba(15,23,42,0.55); backdrop-filter:blur(2px); border-radius:12px; display:flex; align-items:center; justify-content:center; z-index:5; text-align:center;">
+        <div style="padding:1rem 1.25rem; background:rgba(255,255,255,0.9); border:1px solid #e2e8f0; border-radius:10px; max-width: 90%;">
+            <div style="font-weight:800; color:#0f172a; font-size:1rem; margin-bottom:.25rem;">Applications Closed</div>
+            <div style="color:#334155; font-size:.9rem;">This position is currently not accepting applications.<br/>Subscribe for updates in the Notifications section.</div>
+        </div>
+    </div>
     @if($job['featured'])
         <div class="job-header">
             <div class="job-badge">Featured</div>
@@ -19,6 +26,7 @@
     
     <div class="job-content">
         <h3 class="job-title">{{ $job['title'] }}</h3>
+        
         <div class="job-meta">
             <div class="job-meta-line">
                 <span class="job-location">
@@ -78,13 +86,13 @@
         </div>
 
         <div class="job-actions">
-            <a href="mailto:love@billplz.com?subject={{ rawurlencode($job['title'].' Application -  Billplz Careers') }}&body={{ rawurlencode("Hello Billplz Team,\r\n\r\nI would like to apply for the {$job['title']} position.\r\n\r\nName: \r\nPhone: \r\nPortfolio/LinkedIn: \r\nCover letter: \r\nReferral: Ahmad Syaafi\r\n\r\nThank you.") }}" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i>
-                Apply Now
-            </a>
-            <button class="btn btn-secondary" onclick="toggleJobDetails(this)">
-                <i class="fas fa-chevron-down"></i>
-                View Details
+            <button type="button" class="btn btn-primary" disabled aria-disabled="true" title="Applications are closed">
+                <i class="fas fa-ban"></i>
+                Applications Closed
+            </button>
+            <button type="button" class="btn btn-secondary" disabled aria-disabled="true" title="Details are unavailable at this time">
+                <i class="fas fa-info-circle"></i>
+                Details Unavailable
             </button>
         </div>
     </div>
